@@ -29,6 +29,9 @@ public class Enrollment implements Serializable {
     @Column(name = "fee")
     private String fee;
 
+    public Enrollment() {
+    }
+
     public Date getEndDate() {
         return endDate;
     }

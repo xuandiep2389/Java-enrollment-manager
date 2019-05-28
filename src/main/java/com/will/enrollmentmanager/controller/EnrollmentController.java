@@ -35,10 +35,7 @@ public class EnrollmentController {
         Enrollment enrollment1 = new Enrollment(student1,course1,"500");
 
         return enrollmentRepository.save(enrollment1);
-
     }
-
-
 
     @GetMapping("/enrollments")
     public List<Enrollment> getAllEnrollment() {
