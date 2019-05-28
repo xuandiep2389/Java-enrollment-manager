@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class CourseController {
 
     @Autowired
@@ -32,13 +33,12 @@ public class CourseController {
     }
 
 
-    @PutMapping("/courses/{courseId}")
+    @PatchMapping("/courses/{courseId}")
     public Course updateCourse(@PathVariable Long courseId, @Valid @RequestBody Course courseRequest) {
         return courseRepository.findById(courseId).map(
                 course -> {
                     course.setName(courseRequest.getName());
                     course.setDescription(courseRequest.getDescription());
-                    course.setEnrollments(courseRequest.getEnrollments());
                     return courseRepository.save(course);
                 }
         ).orElseThrow(()->new ResourceNotFoundException("CourseId "+courseId+" not found"));

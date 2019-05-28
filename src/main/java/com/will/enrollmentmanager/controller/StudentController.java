@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class StudentController {
 
     @Autowired
@@ -32,14 +33,13 @@ public class StudentController {
     }
 
 
-    @PutMapping("/students/{studentId}")
+    @PatchMapping("/students/{studentId}")
     public Student updateStudent(@PathVariable Long studentId, @Valid @RequestBody Student studentRequest) {
         return studentRepository.findById(studentId).map(
                 student -> {
                     student.setName(studentRequest.getName());
                     student.setAge(studentRequest.getAge());
                     student.setGender(studentRequest.getGender());
-                    student.setEnrollments(studentRequest.getEnrollments());
                     return studentRepository.save(student);
                 }
         ).orElseThrow(()->new ResourceNotFoundException("StudentId "+studentId+" not found"));
