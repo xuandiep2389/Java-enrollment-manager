@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "courses")
 public class Course {
 
     @Id
@@ -21,18 +20,13 @@ public class Course {
     @NotNull
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "courses")
-    private Set<Student> students = new HashSet<>();
+    @OneToMany(mappedBy = "course")
+    private Set<Enrollment> enrollments;
 
-    public Course(@NotNull @Size(max = 100) String name, @NotNull String description, Set<Student> students) {
+    public Course(@NotNull @Size(max = 100) String name, @NotNull String description, Set<Enrollment> enrollments) {
         this.name = name;
         this.description = description;
-        this.students = students;
+        this.enrollments = enrollments;
     }
 
     public Course(@NotNull @Size(max = 100) String name, @NotNull String description) {
@@ -67,11 +61,11 @@ public class Course {
         this.description = description;
     }
 
-    public Set<Student> getStudents() {
-        return students;
+    public Set<Enrollment> getEnrollments() {
+        return enrollments;
     }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public void setEnrollments(Set<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
 }

@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "students")
 public class Student {
 
     @Id
@@ -24,15 +23,24 @@ public class Student {
     @NotNull
     private String age;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "enrollment",
-        joinColumns = {@JoinColumn(name = "student_id")},
-        inverseJoinColumns = { @JoinColumn(name = "course_id")})
-    private Set<Course> courses = new HashSet<>();
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Enrollment> enrollments;
+
+    public Student() {
+    }
+
+    public Student(@NotNull @Size(max = 100) String name, @NotNull String gender, @NotNull String age, Set<Enrollment> enrollments) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.enrollments = enrollments;
+    }
+
+    public Student(@NotNull @Size(max = 100) String name, @NotNull String gender, @NotNull String age) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
 
     public Long getId() {
         return id;
@@ -66,27 +74,11 @@ public class Student {
         this.age = age;
     }
 
-    public Set<Course> getCourses() {
-        return courses;
+    public Set<Enrollment> getEnrollments() {
+        return enrollments;
     }
 
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
-    }
-
-    public Student(@NotNull @Size(max = 100) String name, @NotNull String gender, @NotNull String age, Set<Course> courses) {
-        this.name = name;
-        this.gender = gender;
-        this.age = age;
-        this.courses = courses;
-    }
-
-    public Student(@NotNull @Size(max = 100) String name, @NotNull String gender, @NotNull String age) {
-        this.name = name;
-        this.gender = gender;
-        this.age = age;
-    }
-
-    public Student() {
+    public void setEnrollments(Set<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
 }

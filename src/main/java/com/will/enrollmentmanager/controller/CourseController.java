@@ -38,7 +38,7 @@ public class CourseController {
                 course -> {
                     course.setName(courseRequest.getName());
                     course.setDescription(courseRequest.getDescription());
-                    course.setStudents(courseRequest.getStudents());
+                    course.setEnrollments(courseRequest.getEnrollments());
                     return courseRepository.save(course);
                 }
         ).orElseThrow(()->new ResourceNotFoundException("courseId "+courseId+" not found"));

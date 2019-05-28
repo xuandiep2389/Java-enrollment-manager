@@ -39,7 +39,7 @@ public class StudentController {
                     student.setName(studentRequest.getName());
                     student.setAge(studentRequest.getAge());
                     student.setGender(studentRequest.getGender());
-                    student.setCourses(studentRequest.getCourses());
+                    student.setEnrollments(studentRequest.getEnrollments());
                     return studentRepository.save(student);
                 }
         ).orElseThrow(()->new ResourceNotFoundException("StudentId "+studentId+" not found"));
