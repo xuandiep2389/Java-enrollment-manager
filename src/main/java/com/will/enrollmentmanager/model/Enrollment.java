@@ -23,6 +23,36 @@ public class Enrollment implements Serializable {
     @Column(name = "start_date")
     private Date startDate;
 
+    @Column(name = "end_date")
+    private Date endDate;
+
+    @Column(name = "fee")
+    private String fee;
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getFee() {
+        return fee;
+    }
+
+    public void setFee(String fee) {
+        this.fee = fee;
+    }
+
+    public Enrollment(Student student, Course course, Date startDate, Date endDate, String fee) {
+        this.student = student;
+        this.course = course;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.fee = fee;
+    }
+
     public Long getId() {
         return id;
     }
@@ -33,6 +63,12 @@ public class Enrollment implements Serializable {
 
     public Student getStudent() {
         return student;
+    }
+
+    public Enrollment(Student student, Course course, String fee) {
+        this.student = student;
+        this.course = course;
+        this.fee = fee;
     }
 
     public void setStudent(Student student) {

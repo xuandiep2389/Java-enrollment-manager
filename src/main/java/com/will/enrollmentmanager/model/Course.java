@@ -1,5 +1,7 @@
 package com.will.enrollmentmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,6 +22,7 @@ public class Course {
     @NotNull
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "course")
     private Set<Enrollment> enrollments;
 
