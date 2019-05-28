@@ -41,7 +41,7 @@ public class CourseController {
                     course.setEnrollments(courseRequest.getEnrollments());
                     return courseRepository.save(course);
                 }
-        ).orElseThrow(()->new ResourceNotFoundException("courseId "+courseId+" not found"));
+        ).orElseThrow(()->new ResourceNotFoundException("CourseId "+courseId+" not found"));
     }
 
     @DeleteMapping("/courses/{courseId}")
@@ -49,6 +49,6 @@ public class CourseController {
         return courseRepository.findById(courseId).map(course -> {
             courseRepository.delete(course);
             return ResponseEntity.ok().build();
-        }).orElseThrow(()-> new ResourceNotFoundException("courseId "+courseId+" not found"));
+        }).orElseThrow(()-> new ResourceNotFoundException("CourseId "+courseId+" not found"));
     }
 }
