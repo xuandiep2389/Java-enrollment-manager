@@ -1,11 +1,17 @@
 package com.will.enrollmentmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "enrollments")
+@EntityListeners(AuditingEntityListener.class)
 public class Enrollment implements Serializable {
 
     @Id
@@ -20,10 +26,14 @@ public class Enrollment implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @Column(name = "start_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "start_date", nullable = false, updatable = false)
+    @CreatedDate
     private Date startDate;
 
-    @Column(name = "end_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "end_date", nullable = false)
+    @LastModifiedDate
     private Date endDate;
 
     @Column(name = "fee")
@@ -53,6 +63,13 @@ public class Enrollment implements Serializable {
         this.course = course;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.fee = fee;
+    }
+
+    public Enrollment(Student student, Course course, Date startDate, String fee) {
+        this.student = student;
+        this.course = course;
+        this.startDate = startDate;
         this.fee = fee;
     }
 

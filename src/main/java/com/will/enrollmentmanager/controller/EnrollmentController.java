@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,10 +31,13 @@ public class EnrollmentController {
     //test add enrollment
     @GetMapping("/enrollment1")
     public Enrollment addToEnrollment() {
-        Student student1 = studentRepository.findById((long)1).get();
+        Student student1 = studentRepository.findById((long)2).get();
         Course course1 = courseRepository.findById((long)1).get();
 
-        Enrollment enrollment1 = new Enrollment(student1,course1,"500");
+        Enrollment enrollment1 = new Enrollment();
+        enrollment1.setStudent(student1);
+        enrollment1.setCourse(course1);
+        enrollment1.setFee("500$");
 
         return enrollmentRepository.save(enrollment1);
     }
