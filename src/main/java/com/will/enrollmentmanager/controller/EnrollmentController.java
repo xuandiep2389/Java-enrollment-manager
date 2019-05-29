@@ -28,19 +28,19 @@ public class EnrollmentController {
     @Autowired
     private CourseRepository courseRepository;
 
-    //test add enrollment
-    @GetMapping("/enrollment1")
-    public Enrollment addToEnrollment() {
-        Student student1 = studentRepository.findById((long)1).get();
-        Course course1 = courseRepository.findById((long)1).get();
-
-        Enrollment enrollment1 = new Enrollment();
-        enrollment1.setStudent(student1);
-        enrollment1.setCourse(course1);
-        enrollment1.setFee("500$");
-
-        return enrollmentRepository.save(enrollment1);
-    }
+//    //test add enrollment
+//    @GetMapping("/enrollment1")
+//    public Enrollment addToEnrollment() {
+//        Student student1 = studentRepository.findById((long)1).get();
+//        Course course1 = courseRepository.findById((long)1).get();
+//
+//        Enrollment enrollment1 = new Enrollment();
+//        enrollment1.setStudent(student1);
+//        enrollment1.setCourse(course1);
+//        enrollment1.setFee("500$");
+//
+//        return enrollmentRepository.save(enrollment1);
+//    }
 
     @GetMapping("/findEnrollmentByStudentId")
     public List<Enrollment> findEBySId() {
