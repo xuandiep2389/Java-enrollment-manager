@@ -11,5 +11,5 @@ import java.util.List;
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
     @Query("SELECT e from Enrollment e where e.student.id = ?1")
-    List<Enrollment> findEnrollmentByStudenId(Long id);
+    List<Enrollment> findEnrollmentsByStudentId(Long id);
 }
