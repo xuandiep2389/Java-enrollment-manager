@@ -28,7 +28,7 @@ public class Course {
     private String description;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Enrollment> enrollments;
 
     public Course(@NotNull @Size(max = 100) String name, @NotNull String description, Set<Enrollment> enrollments) {
