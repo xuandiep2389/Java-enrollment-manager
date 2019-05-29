@@ -31,7 +31,7 @@ public class EnrollmentController {
     //test add enrollment
     @GetMapping("/enrollment1")
     public Enrollment addToEnrollment() {
-        Student student1 = studentRepository.findById((long)2).get();
+        Student student1 = studentRepository.findById((long)1).get();
         Course course1 = courseRepository.findById((long)1).get();
 
         Enrollment enrollment1 = new Enrollment();
@@ -41,6 +41,12 @@ public class EnrollmentController {
 
         return enrollmentRepository.save(enrollment1);
     }
+
+    @GetMapping("/findEnrollmentByStudentId")
+    public List<Enrollment> findEBySId() {
+        return enrollmentRepository.findEnrollmentByStudenId((long)1);
+    }
+
 
     @GetMapping("/enrollments")
     public List<Enrollment> getAllEnrollment() {
