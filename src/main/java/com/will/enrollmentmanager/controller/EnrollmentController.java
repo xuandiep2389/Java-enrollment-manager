@@ -65,4 +65,24 @@ public class EnrollmentController {
             return ResponseEntity.ok().build();
         }).orElseThrow(()-> new ResourceNotFoundException("EnrollmentId "+enrollmentId+" not found" ));
     }
+
+    @GetMapping("/enrollments/{enrollmentId}")
+    public Enrollment getEnrollment(@PathVariable Long enrollmentId) {
+        return enrollmentRepository.findById(enrollmentId).orElseThrow(()->new ResourceNotFoundException("EnrollmentId "+enrollmentId+" not found"));
+    }
+
+    @PatchMapping("/enrollments/{enrollmentId}")
+    public Enrollment updateEnrollment(@PathVariable Long enrollmentId, @Valid @RequestBody Enrollment enrollmentRequest) {
+        return enrollmentRepository.findById(enrollmentId).map(
+                enrollment -> {
+                    enrollment.setStudent(enrollmentRequest.getStudent());
+                    enrollment.setCourse(enrollmentRequest.getCourse());
+                    enrollment.setFee(enrollmentRequest.getFee());
+                    enrollment.setEndDate(enrollmentRequest.getEndDate());
+
+                    return enrollmentRepository.save(enrollment);
+                }
+        ).orElseThrow(()->new ResourceNotFoundException("EnrollmentId "+enrollmentId+" not found"));
+    }
+
 }
