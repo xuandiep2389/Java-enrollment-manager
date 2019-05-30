@@ -41,12 +41,22 @@ public class EnrollmentController {
 //
 //        return enrollmentRepository.save(enrollment1);
 //    }
+
+
+    //Get all enrollment with student id
     @GetMapping("/findEnrollmentByStudentId/{studentId}")
     public List<Enrollment> findEBySId(@PathVariable Long studentId) {
         return enrollmentRepository.findEnrollmentsByStudentId(studentId);
     }
 
 
+    //Get all enrollment with course id
+    @GetMapping("/findEnrollmentByCourseId/{studentId}")
+    public List<Enrollment> findEByCId(@PathVariable Long studentId) {
+        return enrollmentRepository.findEnrollmentByCourseId(studentId);
+    }
+
+    //Get all enrollment
     @GetMapping("/enrollments")
     public List<Enrollment> getAllEnrollment() {
         return enrollmentRepository.findAll();
