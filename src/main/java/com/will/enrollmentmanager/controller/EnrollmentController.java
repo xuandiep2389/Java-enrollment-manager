@@ -87,6 +87,7 @@ public class EnrollmentController {
                     enrollment.setStudent(enrollmentRequest.getStudent());
                     enrollment.setCourse(enrollmentRequest.getCourse());
                     enrollment.setFee(enrollmentRequest.getFee());
+                    enrollment.setStartDate(enrollmentRequest.getStartDate());
                     enrollment.setEndDate(enrollmentRequest.getEndDate());
 
                     return enrollmentRepository.save(enrollment);
