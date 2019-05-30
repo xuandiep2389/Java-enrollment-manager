@@ -27,7 +27,7 @@ public class Enrollment implements Serializable {
     private Course course;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "start_date", nullable = false, updatable = false)
+    @Column(name = "start_date", nullable = true)
     @CreatedDate
     private Date startDate;
 
